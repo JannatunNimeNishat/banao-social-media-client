@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.my-container{
+    @apply w-11/12 mx-auto
+}
+.active1{
+    @apply text-yellow-500 font-semibold
+}
+.my-btn{
+    @apply btn  text-white bg-yellow-500 font-bold hover:bg-white hover:text-black
+}
