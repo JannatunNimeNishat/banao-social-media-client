@@ -1,11 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-
+    const [regiterEroor, setRegisterError] = useState()
+    const navigate = useNavigate()
     const onSubmit = (data) => {
-        console.log(data);
+
+
+        // register a user
+
+        fetch('http://localhost:5000/signUp', {
+            method: 'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => {
+            setRegisterError('')
+            if(data.insertedId){
+                navigate('/')
+            }
+            else{
+                setRegisterError(data.message)
+            }
+        })
 
     }
     return (
@@ -50,12 +73,14 @@ const Register = () => {
                 {errors.password?.type === 'minLength' && <p className="text-red-500">Password must be 6 characters</p>}
                 {errors.password?.type === 'pattern' && <p className="text-red-500">Password must have one upper case and one special character</p>}
                 
-                <input className='mt-8 my-btn  w-1/3 cursor-pointer' type="submit" value="Register" />
-
                 {
-                    // loginError && <p className='mt-4 text-red-700 font-semibold text-center'>{loginError}</p>
+                    register && <p className="text-red-500">{regiterEroor}</p>
                 }
 
+
+                <input className='mt-8 my-btn  w-1/3 cursor-pointer' type="submit" value="Register" />
+
+               
 
                 <p className='mt-4'><small>Already have an account ? please <span className='primary-color font-semibold'>
                     <Link to='/login'>Login</Link>
