@@ -17,7 +17,7 @@ const Navbar = () => {
             .then(res => res.json())
             .then(data => {
                 setUser(data)
-                console.log('from use effect', data);
+                //console.log('from use effect', data);
             })
     }, [getEmailFromLocal])
 
@@ -47,6 +47,11 @@ const Navbar = () => {
         {
             user?.email && <li>
                 <Link to='/dashboard' >{user?.name}</Link>
+            </li>
+        }
+        {
+            user?.email && <li>
+                <Link to='/dashboard/createPost' >Create Post</Link>
             </li>
         }
 

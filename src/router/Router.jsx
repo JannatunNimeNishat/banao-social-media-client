@@ -7,6 +7,7 @@ import Login from "../pages/Login/Login";
 import CreatePost from "../pages/CreatePost/CreatePost";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import GetAllPostByUser from "../pages/SocialPost/GetAllPostByUser/GetAllPostByUser";
+import EditPost from "../pages/SocialPost/EditPost/EditPost";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path:'allPost',
                 element:<GetAllPostByUser></GetAllPostByUser>
+            },
+            {
+                path:'editPost/:id',
+                element:<EditPost></EditPost>
             }
         ]
     }

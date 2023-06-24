@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import useGetUser from "../../../hooks/useGetUser";
 import { BsTrash } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 const GetAllPostByUser = () => {
+    
     const [user] = useGetUser()
     const [posts, setPosts] = useState([])
 
@@ -11,12 +14,14 @@ const GetAllPostByUser = () => {
             .then(res => res.json())
             .then(data => {
                 setPosts(data)
-                console.log('from allusers ', data);
+                console.log('from specific user posts ', data);
             })
-    }, [user?.email])
+    }, [user])
+
+    //console.log('posts',posts);
+   // console.log('user',user?.email);
 
     const total_comment = posts?.reduce((sum,item) => sum + item?.total_comments , 0)
-
 
     const handleDelete = (_id)=>{
         console.log(_id);
@@ -25,12 +30,12 @@ const GetAllPostByUser = () => {
         })
         .then(res => res.json())
             .then(data => {
-                //setPosts(data)
+               
                 console.log('delete ', data);
                 if(data.deletedCount> 0){
                     const reamingPosts = posts.filter(post => post._id !== _id);
                     setPosts(reamingPosts);
-                    
+
                 }
             })
     }
@@ -39,9 +44,7 @@ const GetAllPostByUser = () => {
     return (
         <div className="min-h-screen min-w-full">
             <h3 className="text-2xl font-semibold my-5">Total posts: {posts?.length}</h3>
-            <div>
-                {/* { */}
-
+            <div> 
 
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -62,7 +65,7 @@ const GetAllPostByUser = () => {
                         <tbody>
                             {/* row 1 */}
                             {
-                                posts.map((post, index) => <tr key={post._id}>
+                                posts?.map((post, index) => <tr key={post._id}>
                                     <th>
                                         {index + 1}
                                     </th>
@@ -92,9 +95,9 @@ const GetAllPostByUser = () => {
                                         </button>
                                     </th>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">
+                                        <Link to={`/dashboard/editPost/${post._id}`} className="btn btn-ghost btn-xs">
                                             <FaRegEdit className="text-green-500 h-4 w-4"/>
-                                        </button>
+                                        </Link>
                                     </th>
                                 </tr>)
                             }
@@ -103,7 +106,7 @@ const GetAllPostByUser = () => {
 
                     </table>
                 </div>
-                {/* } */}
+               
             </div>
 
         </div>

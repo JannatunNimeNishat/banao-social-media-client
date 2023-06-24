@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+//import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 
@@ -37,11 +37,11 @@ const useGetUser = () => {
             .then(data => {
                 setLoading(false)
                 setUser(data)
-                console.log('from getUser hook', data);
+                //console.log('from getUser hook', data);
             })
     }, [getEmailFromLocal])
 
-    return [user]
+    return [user,loading]
 }
 
 export default useGetUser;

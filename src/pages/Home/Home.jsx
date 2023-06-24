@@ -1,9 +1,10 @@
+import Posts from "./Posts";
 
 
 const Home = () => {
     return (
         <div>
-            <h3>This is home</h3>
+            <Posts></Posts>
         </div>
     );
 };
