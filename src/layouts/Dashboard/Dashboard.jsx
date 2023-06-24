@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useGetUser from "../../hooks/useGetUser";
 
 const Dashboard = () => {
@@ -24,9 +24,16 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/createPost' className={({ isActive }) => isActive ? 'active1' : ''}>Create Post</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/allPost' className={({ isActive }) => isActive ? 'active1' : ''}>All Posts</NavLink>
+                        <NavLink to='/dashboard/allPost' className={({ isActive }) => isActive ? 'active1' : ''}>All Posts</NavLink>
                     </li>
+                    <hr className="h-1 bg-black mt-10" />
 
+                    <li>
+                        <Link to='/'>Home</Link>
+                    </li>
+                    <li>
+                        <Link to='/'>LogOut</Link>
+                    </li>
                 </ul>
 
             </div>

@@ -3,9 +3,10 @@ import Main from "../layouts/Main";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
-import UserDashBoard from "../pages/UserDashBoard/UserDashBoard";
+
 import CreatePost from "../pages/CreatePost/CreatePost";
 import Dashboard from "../layouts/Dashboard/Dashboard";
+import GetAllPostByUser from "../pages/SocialPost/GetAllPostByUser/GetAllPostByUser";
 
 const router = createBrowserRouter([
     {
@@ -27,12 +28,16 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path:'/dashboard',
+        path:'dashboard',
         element:<Dashboard></Dashboard>,
         children:[
             {
-                path:'/dashboard/createPost',
+                path:'createPost',
                 element:<CreatePost></CreatePost>
+            },
+            {
+                path:'allPost',
+                element:<GetAllPostByUser></GetAllPostByUser>
             }
         ]
     }

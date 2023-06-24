@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -31,9 +31,11 @@ const useGetUser = () => {
 
 
     useEffect(() => {
+        setLoading(true)
         fetch(`http://localhost:5000/user/${JSON.parse(getEmailFromLocal)}`)
             .then(res => res.json())
             .then(data => {
+                setLoading(false)
                 setUser(data)
                 console.log('from getUser hook', data);
             })
