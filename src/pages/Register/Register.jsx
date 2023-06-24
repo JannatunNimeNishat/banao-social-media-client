@@ -23,7 +23,7 @@ const Register = () => {
         .then(data => {
             setRegisterError('')
             if(data.insertedId){
-                navigate('/')
+                navigate('/login')
             }
             else{
                 setRegisterError(data.message)

@@ -1,7 +1,36 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import useGetUser from "../../../hooks/useGetUser";
+import { useEffect, useState } from "react";
 
 
 const Navbar = () => {
+    // const [user, refetch] = useGetUser()
+    const [user, setUser] = useState([])
+    // console.log('from navbar', user);
+    const navigate = useNavigate()
+    const getEmailFromLocal = localStorage.getItem('logged-user');
+
+
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/user/${JSON.parse(getEmailFromLocal)}`)
+            .then(res => res.json())
+            .then(data => {
+                setUser(data)
+                console.log('from use effect', data);
+            })
+    }, [getEmailFromLocal])
+
+
+
+
+    const handleLogOut = () => {
+        localStorage.removeItem('logged-user')
+
+        navigate('/login')
+    }
+
+
 
     const navItems = <>
         {/* <li><NavLink className={({isActive}) => isActive ? 'active' : '' } to ='/'>Home</NavLink></li> */}
@@ -14,7 +43,13 @@ const Navbar = () => {
         <li>
             <NavLink to='#' className={({ isActive }) => isActive ? 'active1' : ''}>Contact</NavLink>
         </li>
-       
+
+        {
+            user?.email && <li>
+                <Link to='/dashboard' >{user?.name}</Link>
+            </li>
+        }
+
 
 
     </>
@@ -40,8 +75,15 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="btn  text-white bg-yellow-500 font-bold hover:bg-white hover:text-black">
-                    Login</Link>
+                {
+                    user?.email ?
+                        <p onClick={handleLogOut} className="btn  text-white bg-yellow-500 font-bold hover:bg-white hover:text-black">
+                            Logout</p>
+                        :
+                        <Link to='/login' className="btn  text-white bg-yellow-500 font-bold hover:bg-white hover:text-black">
+                            Login</Link>
+
+                }
             </div>
         </div>
     );

@@ -1,14 +1,37 @@
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loginError, setLoginError] = useState()
+
+    const navigate = useNavigate()
+
 
     const onSubmit = (data) => {
         console.log(data);
-
+        fetch('http://localhost:5000/signIn', {
+            method: 'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => {
+            setLoginError('')
+            if(data.email){
+                console.log(data);
+                localStorage.setItem('logged-user', JSON.stringify(data.email))
+                navigate('/')
+            }
+            else{
+                setLoginError(data.message)
+            }
+        })
     }
 
 
@@ -39,7 +62,7 @@ const Login = () => {
                 <input className='mt-8 my-btn  w-1/3 cursor-pointer' type="submit" value="Login" />
 
                 {
-                    // loginError && <p className='mt-4 text-red-700 font-semibold text-center'>{loginError}</p>
+                     loginError && <p className='mt-4 text-red-700 font-semibold text-center'>{loginError}</p>
                 }
 
 
