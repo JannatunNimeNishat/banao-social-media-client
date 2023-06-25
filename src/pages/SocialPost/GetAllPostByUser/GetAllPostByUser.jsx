@@ -10,7 +10,7 @@ const GetAllPostByUser = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user-posts/${user?.email}`)
+        fetch(`https://banao-social-media-server.vercel.app/user-posts/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setPosts(data)
@@ -25,7 +25,7 @@ const GetAllPostByUser = () => {
 
     const handleDelete = (_id)=>{
         console.log(_id);
-        fetch(`http://localhost:5000/delete-post/${_id}`,{
+        fetch(`https://banao-social-media-server.vercel.app/delete-post/${_id}`,{
             method:'DELETE',
         })
         .then(res => res.json())

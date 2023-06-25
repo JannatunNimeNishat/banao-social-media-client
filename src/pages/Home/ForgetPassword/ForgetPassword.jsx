@@ -15,7 +15,7 @@ const ForgetPassword = () => {
     const onSubmit = (data) => {
         console.log(data);
         setLoginError('')
-        fetch('http://localhost:5000/forget-password', {
+        fetch('https://banao-social-media-server.vercel.app/forget-password', {
             method: 'PUT',
             headers:{
                 'content-type':'application/json'

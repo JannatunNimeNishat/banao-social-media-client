@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user/${JSON.parse(getEmailFromLocal)}`)
+        fetch(`https://banao-social-media-server.vercel.app/user/${JSON.parse(getEmailFromLocal)}`)
             .then(res => res.json())
             .then(data => {
                 setUser(data)

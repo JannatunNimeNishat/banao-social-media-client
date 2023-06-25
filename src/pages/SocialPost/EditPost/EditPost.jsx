@@ -14,7 +14,7 @@ const EditPost = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/get-a-post/${id}`)
+        fetch(`https://banao-social-media-server.vercel.app/get-a-post/${id}`)
             .then(res => res.json())
             .then(data => {
                 setLoading(false)
@@ -30,7 +30,7 @@ const EditPost = () => {
 
     const onSubmit = (data) =>{
         
-        fetch(`http://localhost:5000/update-a-post/${id}`,{
+        fetch(`https://banao-social-media-server.vercel.app/update-a-post/${id}`,{
             method: 'PUT',
             headers:{
                 'content-type':'application/json'

@@ -8,7 +8,7 @@ const CreatePost = () => {
         const newPost = {user_email: user?.email, post_image:data.image, post_description: data.post_description , total_like:0, total_comments:[]}
 
         //console.log(newPost);
-        fetch('http://localhost:5000/add-post',{
+        fetch('https://banao-social-media-server.vercel.app/add-post',{
             method: 'POST',
             headers:{
                 'content-type':'application/json'

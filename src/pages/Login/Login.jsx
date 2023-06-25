@@ -13,7 +13,7 @@ const Login = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-        fetch('http://localhost:5000/signIn', {
+        fetch('https://banao-social-media-server.vercel.app/signIn', {
             method: 'POST',
             headers:{
                 'content-type':'application/json'

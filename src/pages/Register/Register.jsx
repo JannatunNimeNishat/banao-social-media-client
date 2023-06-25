@@ -12,7 +12,7 @@ const Register = () => {
 
         // register a user
 
-        fetch('http://localhost:5000/signUp', {
+        fetch('https://banao-social-media-server.vercel.app/signUp', {
             method: 'POST',
             headers:{
                 'content-type':'application/json'

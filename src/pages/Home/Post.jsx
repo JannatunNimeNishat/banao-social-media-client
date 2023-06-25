@@ -17,7 +17,7 @@ const Post = ({ singlePost }) => {
         setIsLiked(!isLiked)
         setInitialLike(total_like+1)
 
-        fetch(`http://localhost:5000/add-like/${_id}`,{
+        fetch(`https://banao-social-media-server.vercel.app/add-like/${_id}`,{
             method:'PUT'
         })
         .then(res => res.json())
@@ -34,7 +34,7 @@ const Post = ({ singlePost }) => {
         setInitialComments(previousComments)
 
 
-        fetch(`http://localhost:5000/add-comment/${_id}`,{
+        fetch(`https://banao-social-media-server.vercel.app/add-comment/${_id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

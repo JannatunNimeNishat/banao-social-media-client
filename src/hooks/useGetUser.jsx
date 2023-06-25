@@ -13,7 +13,7 @@ const useGetUser = () => {
           queryKey:['user', getEmailFromLocal],
           enabled: !!getEmailFromLocal,
           queryFn: async () =>{
-            const res =  await fetch(`http://localhost:5000/user/${JSON.parse(getEmailFromLocal)}`)
+            const res =  await fetch(`https://banao-social-media-server.vercel.app/user/${JSON.parse(getEmailFromLocal)}`)
             const data = res.json()
             return data;
               
@@ -32,7 +32,7 @@ const useGetUser = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/user/${JSON.parse(getEmailFromLocal)}`)
+        fetch(`https://banao-social-media-server.vercel.app/user/${JSON.parse(getEmailFromLocal)}`)
             .then(res => res.json())
             .then(data => {
                 setLoading(false)

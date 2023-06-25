@@ -6,7 +6,7 @@ const useGetAllPosts = () => {
     const [allPosts, setAllPosts] = useState()
 
     useEffect(() => {
-        fetch('http://localhost:5000/all-posts')
+        fetch('https://banao-social-media-server.vercel.app/all-posts')
             .then(res => res.json())
             .then(data => {
                 setAllPosts(data)
