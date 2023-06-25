@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useGetUser from "../../../hooks/useGetUser";
 import { useEffect, useState } from "react";
-
+import { AiOutlinePlusSquare } from "react-icons/ai";
 
 const Navbar = () => {
     // const [user, refetch] = useGetUser()
@@ -35,13 +35,13 @@ const Navbar = () => {
     const navItems = <>
         {/* <li><NavLink className={({isActive}) => isActive ? 'active' : '' } to ='/'>Home</NavLink></li> */}
         <li>
-            <NavLink to='/' className={({ isActive }) => isActive ? 'active1' : ''}>Home</NavLink>
+            <NavLink to='/' className={({ isActive }) => isActive ? '' : ''}>Home</NavLink>
         </li>
         <li>
-            <NavLink to='#' className={({ isActive }) => isActive ? '' : 'active1'}>About</NavLink>
+            <NavLink to='#' className={({ isActive }) => isActive ? '' : ''}>About</NavLink>
         </li>
         <li>
-            <NavLink to='#' className={({ isActive }) => isActive ? 'active1' : ''}>Contact</NavLink>
+            <NavLink to='#' className={({ isActive }) => isActive ? '' : ''}>Contact</NavLink>
         </li>
 
         {
@@ -51,7 +51,11 @@ const Navbar = () => {
         }
         {
             user?.email && <li>
-                <Link to='/dashboard/createPost' >Create Post</Link>
+                <Link to='/dashboard/createPost' > 
+                <AiOutlinePlusSquare/>
+                Create Post
+                
+                </Link>
             </li>
         }
 

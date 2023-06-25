@@ -8,6 +8,7 @@ import CreatePost from "../pages/CreatePost/CreatePost";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import GetAllPostByUser from "../pages/SocialPost/GetAllPostByUser/GetAllPostByUser";
 import EditPost from "../pages/SocialPost/EditPost/EditPost";
+import ForgetPassword from "../pages/Home/ForgetPassword/ForgetPassword";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login></Login>
+            },
+            {
+                path:'/forgetPassword',
+                element:<ForgetPassword></ForgetPassword>
             }
         ]
     },

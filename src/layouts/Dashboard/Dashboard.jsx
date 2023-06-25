@@ -1,10 +1,19 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import useGetUser from "../../hooks/useGetUser";
 
 const Dashboard = () => {
 
     const [user] = useGetUser()
+    const navigate = useNavigate()
 
+    const handleLogOut = ()=>{
+       
+            localStorage.removeItem('logged-user')
+    
+            navigate('/login')
+       
+    }
+    
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -32,7 +41,7 @@ const Dashboard = () => {
                         <Link to='/'>Home</Link>
                     </li>
                     <li>
-                        <Link to='/'>LogOut</Link>
+                        <p onClick={handleLogOut} >LogOut</p>
                     </li>
                 </ul>
 

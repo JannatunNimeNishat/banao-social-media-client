@@ -1,5 +1,5 @@
 import { FaUserAlt, FaShare } from "react-icons/fa";
-import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import { BiComment } from "react-icons/bi";
 import { useState } from "react";
 const Post = ({ singlePost }) => {

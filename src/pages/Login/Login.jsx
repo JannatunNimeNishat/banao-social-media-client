@@ -57,7 +57,9 @@ const Login = () => {
                     required
                     {...register('password', { required: true })}
                 />
-              
+               <p className='text-left mt-1'><span className='primary-color '>
+                    <Link to='/forgetPassword'><small className='text-yellow-500 font-semibold'>Forgotten password ?</small></Link>
+                </span></p>
 
                 <input className='mt-8 my-btn  w-1/3 cursor-pointer' type="submit" value="Login" />
 

@@ -18,10 +18,10 @@ const GetAllPostByUser = () => {
             })
     }, [user])
 
-    //console.log('posts',posts);
+    console.log('posts',posts);
    // console.log('user',user?.email);
 
-    const total_comment = posts?.reduce((sum,item) => sum + item?.total_comments , 0)
+    const total_comment = posts?.reduce((sum,item) => sum + item?.userComment , 0)
 
     const handleDelete = (_id)=>{
         console.log(_id);
@@ -50,14 +50,14 @@ const GetAllPostByUser = () => {
                     <table className="table">
                         {/* head */}
                         <thead>
-                            <tr>
+                            <tr className="text-center">
                                 <th>
                                     #
                                 </th>
                                 <th>Image</th>
                                 <th>Desc</th>
-                                <th>Likes</th>
-                                <th>Comments</th>
+                                <th>Total Likes</th>
+                                {/* <th>Comments</th> */}
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -83,12 +83,13 @@ const GetAllPostByUser = () => {
                                         <p>{post?.post_description}</p>
 
                                     </td>
-                                    <td>
+                                    <td className="text-center">
                                         <p>{post?.total_like}</p>
                                     </td>
-                                    <td>
-                                        <p>{total_comment}</p>
-                                    </td>
+                                    {/* <td> */}
+                                        {/* <p>{total_comment}</p> */}
+                                        {/* <p>{posts?.total_comments}</p> */}
+                                    {/* </td> */}
                                     <th>
                                         <button className="btn btn-ghost btn-xs">
                                             <BsTrash onClick={()=> handleDelete(post._id)} className="text-red-500 h-4 w-4"/>
