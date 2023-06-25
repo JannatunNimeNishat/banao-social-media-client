@@ -18,7 +18,7 @@ const Posts = () => {
 
     } */
     return (
-        <div className="w-8/12   mx-auto mt-5 ">
+        <div className=" px-4 lg:px-0 lg:w-8/12   mx-auto mt-5 ">
             {
                 allPosts?.map(singlePost =><Post 
                     key={singlePost._id}

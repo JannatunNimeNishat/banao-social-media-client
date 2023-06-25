@@ -9,9 +9,9 @@ const Post = ({ singlePost }) => {
     const { _id, post_description, post_image, total_comments, total_like, user_email } = singlePost;
     const [isLiked, setIsLiked] = useState(false);
     const [initialLike, setInitialLike] = useState(total_like)
+    const [initialComments, setInitialComments] = useState(total_comments)
 
 
-    
     const handleAddLike = (_id) =>{
         console.log(_id);
         setIsLiked(!isLiked)
@@ -24,12 +24,34 @@ const Post = ({ singlePost }) => {
         .then(data => console.log(data))
 
     }
-  
+
+    const handleAddComment = (e) =>{
+        e.preventDefault()
+        const userComment = e.target.comment.value;
+   
+        const previousComments = [...initialComments, {userComment}];
+       
+        setInitialComments(previousComments)
+
+
+        fetch(`http://localhost:5000/add-comment/${_id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify({userComment})
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        
+
+    }
+  console.log(initialComments);
 
     return (
         <>
             <div className=" rounded-xl  bg-slate-100">
-                <div className="  flex items-center gap-4 px-10 pt-8 pb-3  ">
+                <div className="  flex items-center gap-4 px-3 lg:px-10 pt-8 pb-3  ">
                     {/* img of the user */}
 
                     <FaUserAlt className="h-10 w-10" />
@@ -41,7 +63,7 @@ const Post = ({ singlePost }) => {
 
                 </div>
 
-                <div className="px-8 pt-4 pb-8">
+                <div className="px-3 lg:px-8 pt-4 pb-8">
                     <p className="">{singlePost?.post_description}</p>
                 </div>
                 <div className=" h-[400px]">
@@ -53,7 +75,7 @@ const Post = ({ singlePost }) => {
                         Likes: {initialLike}
                     </div>
                     <hr />
-                    <div className="py-3 px-16 flex justify-between">
+                    <div className="py-3  lg:px-16 flex gap-3 text-center justify-between ">
                         <button >
                             <AiFillHeart onClick={()=>{handleAddLike(_id)}} 
                             className={`h-8 w-8 cursor-pointer  inline ${isLiked ? 'text-red-500 ': ''}`} 
@@ -70,18 +92,27 @@ const Post = ({ singlePost }) => {
                     </div>
                     <hr />
 
-                    <form className=" py-5 flex gap-2">
-                        {/* <input type="text" placeholder="Write a comment..." name="" id="" /> */}
-                        <textarea className="w-full" name="" id="" cols="30" rows="2"></textarea>
-                        <input className="px-3 py-2 bg-yellow-500 text-white font-bold rounded-xl" type="submit" value="Post" />
+                    <form onSubmit={handleAddComment} className=" py-5 flex gap-2 cursor-pointer">
+                        
+                        <textarea className="w-full" name="comment" id="" cols="30" rows="2"></textarea>
+                        <input className="px-3 py-2 bg-yellow-500 text-white font-bold rounded-xl cursor-pointer" type="submit" value="Post" />
                     </form>
 
                     <div>
                     {
-                      /*   total_comments?.map((singleComment) => <p className="bg-slate-200 w-3/4 rounded-xl p-3" key={singleComment._id}>
-                            {singleComment}
-                        </p>) */
+                        initialComments?.map((singleComment) => <>
+                        <p className="bg-slate-200 w-3/4 rounded-xl p-3" key={singleComment._id}>
+                            {singleComment.userComment}
+                        </p>
+                        <p className="flex items-center gap-3 ml-3">
+                            <small className="cursor-pointer">Like</small>
+                            <small className="cursor-pointer">Reply</small>
+                            <span>2 m</span>
+                        </p>
+                        <br />
+                        </>)
                     }
+                    
                     </div>
                 </div>
             </div>
