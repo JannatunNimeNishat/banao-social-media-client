@@ -8,20 +8,24 @@ const EditPost = () => {
     const { id } = useParams()
 
     const { register, handleSubmit, reset } = useForm();
-    const [previousPost, setPreviousPost] = useState()
+    const [previousPost, setPreviousPost] = useState([])
     const navigate = useNavigate()
-
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+
         fetch(`http://localhost:5000/get-a-post/${id}`)
             .then(res => res.json())
             .then(data => {
+                setLoading(false)
                 setPreviousPost(data)
-                console.log('edit ', data);
+                //console.log('edit ', data);
 
             })
     }, [id])
 
+    console.log('previous post',previousPost
+    );
 
 
     const onSubmit = (data) =>{
@@ -37,7 +41,7 @@ const EditPost = () => {
         .then(res => res.json())
         .then(data => {
             setPreviousPost(data)
-            console.log('edit ', data);
+           // console.log('edit ', data);
             if(data.modifiedCount> 0){
                 //reset();
                 navigate('/dashboard/allPost')
@@ -52,7 +56,9 @@ const EditPost = () => {
 
 
     return (
-        <div className="min-h-screen min-w-full  flex items-center  ">
+        <>
+        {
+            loading === false && <div className="min-h-screen min-w-full  flex items-center  ">
             <div className="w-full">
                 <form onSubmit={handleSubmit(onSubmit)} className="bg-slate-300 p-10">
 
@@ -62,16 +68,27 @@ const EditPost = () => {
                             <span className="label-text">Posts photoURL*</span>
 
                         </label>
-                        <input type="text" className="file-input w-full  mt-1" defaultValue={`${previousPost?.post_image}`} 
+
+                      {
+                        previousPost !==undefined ? 
+                        <>
+                          <input type="text" className="file-input w-full  mt-1" defaultValue={`${previousPost.post_image}`} 
                             {...register("image", { required: true })}
                         />
+                        </> 
+                        :
+                        <>
+                        
+                        </>
+                      }
+
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Write here*</span>
 
                         </label>
-                        <textarea className="textarea textarea-bordered h-24" defaultValue={`${previousPost?.post_description}`}
+                        <textarea className="textarea textarea-bordered h-24" defaultValue={`${previousPost.post_description}`}
                             {...register("post_description", { required: true })}
                         ></textarea>
 
@@ -82,6 +99,9 @@ const EditPost = () => {
                 </form>
             </div>
         </div>
+        }
+
+        </>
     );
 };
 
